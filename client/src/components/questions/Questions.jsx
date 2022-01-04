@@ -1,55 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
+import React from 'react';
 import QuestionRender from './QuestionRender.jsx'
-import SubmitQuestionForm from './SubmitQuestionForm.jsx'
+import data from '../../sample-data/questions.js'
 
 const Questions = () => {
-
-  const [product_id, updateID] = useState(63609)
-  const [questions, updateQuestions] = useState({results: []})
-  const [questionDisplay, updateQuestionDisplay] = useState(false)
-
-  useEffect(() => {
-    axios.get('/questions', {params: {id: product_id}})
-      .then((response) => {updateQuestions(response.data)})
-      .catch((error) => {console.log(error)})
-  }, [product_id])
-
-  if (questionDisplay) {
-    return (
-      <div className="box">
-        <h1>
-          Questions
-        </h1>
-        <div>
-          {questions.results.map((question) => <QuestionRender question={question}/>)}
-        </div>
-        <div className='box'>
-          <SubmitQuestionForm id={product_id}/>
-        </div>
+  return (
+    <div>
+      <h1>
+        Questions
+      </h1>
+      <div>
+        {data.results.map((question) => <QuestionRender question={question}/>)}
       </div>
-    )
-  } else {
-    return (
-      <div className="box">
-        <h1>
-          Questions
-        </h1>
-        <div>
-          <QuestionRender question={questions.results[0]}/>
-          <QuestionRender question={questions.results[1]}/>
-          <QuestionRender question={questions.results[2]}/>
-          <QuestionRender question={questions.results[3]}/>
-        </div>
-        <div>
-        <button onClick={(event) => {updateQuestionDisplay(true)}}>Show more questions</button>
-        </div>
-        <div className='box'>
-          <SubmitQuestionForm id={product_id}/>
-        </div>
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Questions;
