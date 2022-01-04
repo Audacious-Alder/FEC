@@ -12,13 +12,6 @@ app.use(express.json());
 app.get('/products', api.products.productGET);
 app.get('/products/styles', api.products.productStylesGET);
 
-// Questions
-app.get('/questions', api.questions.questionsGET);
-app.get('/questions', api.questions.questionsGET);
-app.get('/questions/answers', api.questions.answersGET);
-app.post('/questions', api.questions.questionPOST);
-app.post('/questions/answers', api.questions.answersPOST);
-
 // Related
 app.get('/related', api.products.productRelatedGET);
 app.get('/related/products', api.products.multiProductGET);

@@ -132,31 +132,25 @@ const reviews = {
 };
 
 const questions = {
-  questionsGET: (req, res) => {
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions',
-    { headers: options, params: { product_id: req.query.id } })
-      .then((response) => { res.send(response.data); })
-      .catch((error) => { console.log(error); });
+  questionsGET: () => {
+    axios.get('/qa/questions', { headers: options })
+      .then()
+      .catch();
   },
-  answersGET: (req, res) => {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/${req.query.id}/answers`,
-    { headers: options })
-      .then((response) => { res.send(response.data); })
-      .catch((error) => { console.log(error); });
+  answersGET: (question_id) => {
+    axios.get(`/qa/questions/${question_id}/answers`, { headers: options })
+      .then()
+      .catch();
   },
-  questionPOST: (req, res) => {
-    axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions',
-    { body: req.body.body, name: req.body.name, email: req.body.email, product_id: req.body.id },
-    { headers: options })
-      .then((response) => { res.send(response.data); })
-      .catch((error) => { console.log(error); });
+  questionPOST: (question) => {
+    axios.post('/qa/questions', { headers: options })
+      .then()
+      .catch();
   },
-  answersPOST: (req, res) => {
-    axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions/${req.query.id}/answers`,
-    { body: req.body.body, name: req.body.name, email: req.body.email, photos: req.body.photos },
-    { headers: options })
-      .then((response) => { res.send(response.data); })
-      .catch((error) => { console.log(error); });
+  answersPOST: (question_id, answer) => {
+    axios.post(`/qa/questions/${question_id}/answers`, { headers: options })
+      .then()
+      .catch();
   },
   questionsHelpfulPUT: (question_id) => {
     axios.put(`/qa/questions/${question_id}/helpful`, { headers: options })
