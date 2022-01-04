@@ -3,7 +3,7 @@ import Overview from './overview/Overview.jsx';
 import Related from './related/Related.jsx';
 import Reviews from './reviews/Reviews.jsx';
 import Questions from './questions/Questions.jsx';
-import products from '../sample-data/products.js';
+import fetchReviews from './shared/fetchReviews.js';
 import axios from 'axios';
 
 export const App = () => {
@@ -15,8 +15,8 @@ export const App = () => {
   const [productStyle, setProductStyle] = useState({})
   const [reviewMetaData, setReviewMetaData] = useState({});
   const [reviews, setReviews] = useState({});
+  const [reviewsSort, setReviewsSort] = useState('helpful');
   const [isLoading, setIsLoading] = useState(true);
-
   //******************************
   // Data fetching
   //******************************
@@ -26,9 +26,9 @@ export const App = () => {
     const getStyles = axios.get('/products/styles', { params: { product_id: id}})
       .then((res) => { setProductStyle(res.data); } )
     const getReviewsMeta = axios.get('/reviews/meta', {params: { product_id: id }})
-      .then(res => { setReviewMetaData(res.data); })
-    const getReviews = axios.get('/reviews', {params: { product_id: id, count: 10000, sort: 'newest' }})
-      .then(res => { setReviews(res.data); })
+      .then((res) => { setReviewMetaData(res.data); })
+    const getReviews = fetchReviews(id, reviewsSort)
+      .then((res) => { setReviews(res.data); })
 
     const promises = [getProducts, getStyles, getReviewsMeta, getReviews];
     Promise.all(promises)
@@ -48,7 +48,10 @@ export const App = () => {
     console.log('fetching data for product_id: ', productId);
   }, [productId])
 
-
+  useEffect(() => {
+    fetchReviews(productId, reviewsSort)
+      .then((res) => { setReviews(res.data); })
+  }, [reviewsSort])
   //******************************
   // Render
   //******************************
@@ -69,9 +72,11 @@ export const App = () => {
       />
       <Reviews
         productId={productId}
-        reviews={reviews}
         reviewMetaData={reviewMetaData}
-        fetchData={fetchData}
+        reviews={reviews}
+        setReviews={setReviews}
+        reviewsSort={reviewsSort}
+        setReviewsSort={setReviewsSort}
       />
       <Questions />
     </div>

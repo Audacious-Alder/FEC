@@ -1,6 +1,6 @@
 import React from 'react';
 
-const calcStarImg = (numStars) => {
+const calcStarImg = (numStars = 0) => {
   let starImg = [];
   let wholeStars = Math.floor(numStars);
   let fractionStar = numStars - Math.floor(numStars);

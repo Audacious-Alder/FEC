@@ -1,22 +1,37 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import axios from 'axios';
 import calcStarImg from '../shared/calcStarImg.jsx';
+import fetchReviews from '../shared/fetchReviews.js';
 
 const moment = require('moment');
 
 /**
- * Style response box
- * Enable Helpful link to send PUT request to /reviews/:review_id/helpful
- * Enable report link to send PUT request to /reviews/:review_id/report
+ * TODO: Style response box
  */
 
 const ReviewerNameDate = styled.span`
   float: right;
 `
 
-const ReviewEntry = ({ review }) => {
+const ReviewEntry = ({ review, productId, reviewsSort, setReviews }) => {
   const date = moment(review.date);
-
+  //******************************
+  // HANDLERS
+  //******************************
+  const handleClick = (e, review_id, type) => {
+    e.preventDefault();
+    axios.put(`/reviews/${type}`, { review_id: review_id })
+      .then((res) => {
+        alert(`You marked this review as ${type}`);
+        fetchReviews(productId, reviewsSort)
+        .then((res) => { setReviews(res.data); });
+      })
+      .catch((err) => { console.log(err) });
+  }
+  //******************************
+  // RENDER
+  //******************************
   return (
     <div className="box">
       <span>{calcStarImg(review.rating)}</span>
@@ -27,7 +42,8 @@ const ReviewEntry = ({ review }) => {
       <p>{review.body}</p>
       <p>{review.recommend ? '✔ I recommend this product' : ''}</p>
       <p>{review.response ? review.response : ''}</p>
-      Helpful? <a href="#">Yes</a> ({review.helpfulness}) | <a href="#">Report</a>
+      Helpful? <a href='#' onClick={ (e) => handleClick(e, review.review_id, 'helpful') }>Yes</a> ({review.helpfulness})&nbsp;
+      | <a href="#" onClick={ (e) => handleClick(e, review.review_id, 'report') }>Report</a>
     </div>
   );
 };

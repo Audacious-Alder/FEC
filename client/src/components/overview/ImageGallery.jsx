@@ -14,7 +14,7 @@ const ImageGallery = function ({ productPhoto }) {
   }, [productPhoto])
 
   return (
-    <div className="row">
+    <div className="imageGalleryContainer">
       <ul className="imageGalleryList">
         {productPhoto.photos.map((photo, idx) => {
           return (

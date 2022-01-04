@@ -1,19 +1,17 @@
 #app {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .title {
-  padding: 0;
-  font-family: 'Gidugu', sans-serif;
+  font-family: 'Proza Libre', sans-serif;
   font-size: 100px;
+  background-color: white;
   text-align: center;
   line-height: 100px;
-  top: 0;
   width: 100%;
   height: 100px;
-  margin: auto;
-  background-color: white;
   z-index: 1;
+  margin-top: 40px;
 }
 
 .box {
@@ -27,45 +25,80 @@
 /* OVERVIEW */
 /******************************/
 
-.container {
+.overview {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 50px;
+  justify-content: center;
+  height: 1000px;
 }
 
-.column {
+.overviewLeft {
+  margin-left: 100px;
+}
+
+.overviewRight {
   display: flex;
   flex-direction: column;
+  height: 1000px;
+  width: 800px;
+  margin-left: 80px;
+  justify-content: center;
 }
 
 /******************************/
 /* IMAGE GALLERY */
 /******************************/
 
+.imageGalleryContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-right: 30px;
+}
+
 .imageGallery {
-  top: 50px;
-  width: 600px;
+  margin-top: 0;
+  height: 1000px;
+  width: 700px;
+  object-fit: cover;
 }
 
 .imageGalleryList {
   display: flex;
   flex-direction: column;
   list-style: none;
+  margin-top: 0;
+  margin-right: 20px;
+  overflow-y: auto;
+  height: 1000px;
 }
+
 
 .imageGalleryThumbnail {
-  width: 50px;
+  height: 100px;
+  width: 70px;
+  object-fit: cover;
   cursor: pointer;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
+  margin-bottom: 20px;
 }
 
 /******************************/
 /* PRODUCT INFORMATION */
 /******************************/
+
+
+#productContainer {
+  margin-right: 100px;
+  font-size: 26px;
+}
+
+
+#productName{
+  font-size: 32px;
+}
+
 
 .originalPrice {
   text-decoration: line-through;
@@ -80,21 +113,62 @@
 /* STYLE SELECTION */
 /******************************/
 
+.styleContainer {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
 .styleList {
   display: flex;
-  justify-content: space-around;
   list-style: none;
-  flex-grow: 1;
+  padding: 0;
+}
+
+.styleName {
+  padding-bottom: 20px;
 }
 
 .thumbnail {
   object-fit: cover;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   cursor: pointer;
 }
 
+.thumbnailStyle {
+  height: 100px;
+  width: 150px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/******************************/
+/* CART */
+/******************************/
+
+.cartContainer {
+  height: 200px;
+}
+
+
+.quantDrop, .sizeDrop, .cartButton{
+  padding: 12px 16px;
+  margin-right: 20px;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+
+}
+
+.quantDrop {
+  min-width: 50px;
+}
+
+.sizeDrop {
+  max-width: 100px;
+}
 
 /******************************/
 /* RELATED */

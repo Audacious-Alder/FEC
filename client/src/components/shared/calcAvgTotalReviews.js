@@ -8,7 +8,7 @@ const calcAvgTotalReviews = (reviewsMetaData) => {
   }
 
   return {
-    avgStars: (stars/reviews).toFixed(1),
+    avgStars: reviews ? (stars/reviews).toFixed(1) : 0,
     reviews: reviews
   }
 }
