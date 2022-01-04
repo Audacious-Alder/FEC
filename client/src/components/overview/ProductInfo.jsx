@@ -35,29 +35,25 @@ const ProductInfo = function ({ product, styleInfo, reviewMetaData }) {
     }
   }
   return (
-    <div className="box">
-      <h4>
-        Product Name: &nbsp;
+    <div id="productContainer">
+      <span id="productName">
         {product.name}
-      </h4>
-      <h4>
-        Product Description: &nbsp;
-        {product.description}
-      </h4>
-      <h4>
-        Star Rating: &nbsp;
-        {calcAvgTotalReviews(reviewMetaData).avgStars} &nbsp;
-        {calcStarImg(calcAvgTotalReviews(reviewMetaData).avgStars)}
-      </h4>
-      <h4>
-        Price: &nbsp;
+      </span>
+      <span id="productPrice">
         {salePrice()}
-      </h4>
-      <h4>
-        Product Category: &nbsp;
+      </span>
+      <span id="productStar">
+        {calcStarImg(calcAvgTotalReviews(reviewMetaData).avgStars)}
+      </span>
+      <p id="productDescription">
+        {product.description}
+      </p>
+      <span id="productCategory">
         {product.category}
-      </h4>
-      <h4>Social Media</h4>
+      </span>
+      <span id="productSocial">
+        Social Media
+      </span>
     </div>
   );
 };
